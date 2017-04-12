@@ -6,8 +6,8 @@
 //Victor Araujo Vieira - 14/0032801
 
 //Arquivo header do laboratorio de conversao de numeros romanos
+#define ERRO -1
 
 /*Assinatura das funcoes que serao implementadas*/
-void TranformaMaisculo(char *numRomano);
 int ValorDecimalAlgRomano(char romano);
-int ConverteNumeroRomano(char *numRomano);
+int ConverteNumeroRomano(char const *numRomano);

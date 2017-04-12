@@ -4,7 +4,6 @@
 TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 
 	SECTION("Testando a funcao que retorna o algarismo arabico correspondente"){
-		printf("\nTestando a funcao que retorna o algarismo arabico correspondente");
 		REQUIRE(ValorDecimalAlgRomano('I') == 1);
 		REQUIRE(ValorDecimalAlgRomano('V') == 5);
 		REQUIRE(ValorDecimalAlgRomano('X') == 10);
@@ -15,5 +14,13 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(ValorDecimalAlgRomano('s') == -1);
 		REQUIRE(ValorDecimalAlgRomano('-') == -1);
 		REQUIRE(ValorDecimalAlgRomano('i') == -1);
+	}
+
+	SECTION("Testando a funcao que retorna a conversao de romano para arabico"){
+		REQUIRE(ConverteNumeroRomano("I") == 1);
+		REQUIRE(ConverteNumeroRomano("IV") == 4);
+		REQUIRE(ConverteNumeroRomano("MMCMXCVIII") == 2998);
+		REQUIRE(ConverteNumeroRomano("IiV") == -1);
+		REQUIRE(ConverteNumeroRomano("MMMI") == -1);
 	}
 }
