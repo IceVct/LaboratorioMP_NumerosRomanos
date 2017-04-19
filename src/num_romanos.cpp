@@ -30,6 +30,7 @@ int ConverteNumeroRomano(char const *numRomano){
 
 	if(tamString > 30) return ERRO; // se o tamanho da string for maior que 30, retorna erro
 
+
 	i = 0;
 	//a ideia eh percorrer a string, e:
 	//1. Pega um numero, se o proximo eh maior, valor final recebe a subtracao do proximo e do atual
