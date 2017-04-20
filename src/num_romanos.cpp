@@ -77,6 +77,13 @@ int ValidaV_L_D(int *vetorNumeroRom, int tamanhoVetor){
 	return 0; 
 }
 
+//Funcao que valida subtracoes combinadas, ou seja, casos em que um dado valor eh menor que o proximo
+//retorna 0 caso seja valido e -1 caso contrario
+int ValidaSubstracoesCombinadas(int *vetorNumeroRom, int tamanhoVetor){
+
+	return 0;
+}
+
 //Funcao que vai criar um vetor com os valores numericos individuais dos numeros romanos validos
 //Vai retornar 0 caso tenha criado com sucesso e -1 caso tenha ocorrido um erro
 int CriaVetorNumerosArabicos(char const *numRomano, int *vetorNumeroRom){

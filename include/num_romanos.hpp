@@ -12,5 +12,6 @@
 int ValorDecimalAlgRomano(char romano);
 int ValidaI_X_C(int *vetorNumeroRom, int tamanhoVetor);
 int ValidaV_L_D(int *vetorNumeroRom, int tamanhoVetor);
+int ValidaSubstracoesCombinadas(int *vetorNumeroRom, int tamanhoVetor);
 int CriaVetorNumerosArabicos(char const *numRomano, int *vetorNumeroRom);
 int ConverteNumeroRomano(char const *numRomano);
