@@ -23,27 +23,54 @@ int ValorDecimalAlgRomano(char romano){
 	return valorRetorno;
 }
 
-//Funcao que valida os numeros I, X e C, que so podem aparecer ate 3 vezes
+//Funcao que valida os numeros I, X e C, que so podem aparecer ate 3 vezes seguidas
 //retorna 0 caso seja valido e -1 caso contrario
 int ValidaI_X_C(int *vetorNumeroRom, int tamanhoVetor){
 	int contaI = 0, contaX = 0, contaC = 0; // contadores para a quantidade de Is, Xs e Cs que tem no numero romano
-	int i = 0;
+	int invalidaI = 0, invalidaX = 0, invalidaC = 0; // sao as variaveis que vao invalidar I, X e C
+	int i = 0, j = 0;
 
-	//vai percorrer o vetor e realizar as contagens
+
 	for(i = 0; i < tamanhoVetor; i++){
 		if(vetorNumeroRom[i] == 1){
-			contaI++;
+			contaI = 1; // contador eh inicializado como 1
+			if(i+1 < tamanhoVetor){
+				j = i + 1;
+				while(vetorNumeroRom[j] == 1 && j < tamanhoVetor){
+					contaI++;
+					j++;
+				}
+				if(contaI > 3) invalidaI = 1;
+			}
 		}
+
 		if(vetorNumeroRom[i] == 10){
-			contaX++;
+			contaX = 1; // contador eh inicializado como 1
+			if(i+1 < tamanhoVetor){
+				j = i + 1;
+				while(vetorNumeroRom[j] == 10 && j < tamanhoVetor){
+					contaX++;
+					j++;
+				}
+				if(contaX > 3) invalidaX = 1;
+			}
 		}
-		if(vetorNumeroRom[i] == 100){
-			contaC++;
+
+		if(vetorNumeroRom[i] == 1){
+			contaC = 1; // contador eh inicializado como 1
+			if(i+1 < tamanhoVetor){
+				j = i + 1;
+				while(vetorNumeroRom[j] == 100 && j < tamanhoVetor){
+					contaC++;
+					j++;
+				}
+				if(contaC > 3) invalidaC = 1;
+			}
 		}
 	}
 
-	//se qualquer um dos contadores for maior que 3, quer dizer que houve erro
-	if((contaI > 3) || (contaX > 3) || (contaC > 3)){
+	//se qualquer um dos numeros for invalidado, retorna erro
+	if((invalidaI == 1) || (invalidaX == 1) || (invalidaC == 1)){
 		return ERRO;
 	}
 
@@ -151,10 +178,16 @@ int ConverteNumeroRomano(char const *numRomano){
 	if(CriaVetorNumerosArabicos(numRomano, vetorNumeroRom) == ERRO){
 		return ERRO;
 	}
+
 	// se tiver mais de um V, L ou D, ja retorna erro, porque o numero eh invalido
-	if(ValidaV_L_D(vetorNumeroRom, tamString) == ERRO){
+	// se tiver mais de 3 I, X OU C, ja retorna erro, poruqe o numero eh invalido
+	// se tiver algum erro relacionado a subtracoes combinadas, retorna erro
+	if(ValidaV_L_D(vetorNumeroRom, tamString) == ERRO || ValidaI_X_C(vetorNumeroRom, tamString) == ERRO
+	   || ValidaSubstracoesCombinadas(vetorNumeroRom, tamString) == ERRO){
 		return ERRO;
 	}
+		
+	
 	//a ideia eh percorrer a string, e:
 	//1. Pega um numero, se o proximo eh maior, valor final recebe a subtracao do proximo e do atual
 	//2. Se nao eh maior, valor final recebe o proprio valor

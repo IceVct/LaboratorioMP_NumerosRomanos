@@ -41,6 +41,8 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(ValidaV_L_D(vetor4, 3) == 0);
 		int vetor5[] = {100, 500, 500};
 		REQUIRE(ValidaV_L_D(vetor5, 3) == ERRO);
+		int vetor6[] = {100, 1000, 5, 1, 1, 1};
+		REQUIRE(ValidaV_L_D(vetor6, 6) == 0);
 	}
 
 	SECTION("Testando a funcao que valida a quantidade de I, X e C que existem no numero romano"){
@@ -53,9 +55,13 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		int vetor3[] = {1, 1, 1, 1};
 		REQUIRE(ValidaI_X_C(vetor3, 4) == ERRO);
 		int vetor4[] = {100, 50, 100, 100, 100};
-		REQUIRE(ValidaI_X_C(vetor4, 5) == ERRO);
+		REQUIRE(ValidaI_X_C(vetor4, 5) == 0);
 		int vetor5[] = {100, 100, 100};
 		REQUIRE(ValidaI_X_C(vetor5, 3) == 0);
+		int vetor6[] = {1000, 1000, 500, 100, 100, 100, 10, 100, 1, 10};
+		REQUIRE(ValidaI_X_C(vetor6, 10) == 0);
+		int vetor7[] = {100, 1000, 5, 1, 1, 1};
+		REQUIRE(ValidaI_X_C(vetor7, 6) == 0);
 	}
 
 	SECTION("Testando a funcao que valida a as subtracoes combinadas"){
@@ -79,6 +85,8 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(ValidaSubstracoesCombinadas(vetor8, 3) == ERRO);
 		int vetor9[] = {1000, 1000, 100, 1000, 10, 100, 1, 10};
 		REQUIRE(ValidaSubstracoesCombinadas(vetor9, 8) == 0);
+		int vetor10[] = {100, 1000, 5, 1, 1, 1};
+		REQUIRE(ValidaSubstracoesCombinadas(vetor10, 6) == 0);
 	}
 
 	//essa secao testa a funcao ConverteNumeroRomano
