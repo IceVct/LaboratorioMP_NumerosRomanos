@@ -1,6 +1,6 @@
 IDIR = ./include
 CC=g++
-CFLAGS=-I$(IDIR) -ftest-coverage -fprofile-arcs
+CFLAGS=-I$(IDIR)
 
 ODIR = ./obj
 SRC = ./src
@@ -19,9 +19,6 @@ $(ODIR)/%.o: $(SRC)/%.cpp $(DEPS)
 
 teste_num_romano: $(OBJ)
 	g++ -o $@ $^ $(CFLAGS) $(LIBS)
-	./teste_num_romano
-	mv ./obj/*.gcda ./
-	mv ./obj/*.gcno ./
 
 .PHONY: clean
 

@@ -23,23 +23,43 @@ int ValorDecimalAlgRomano(char romano){
 	return valorRetorno;
 }
 
+//Funcao que vai criar um vetor com os valores numericos individuais dos numeros romanos validos
+//Vai retornar 0 caso tenha criado com sucesso e -1 caso tenha ocorrido um erro
+int CriaVetorNumerosArabicos(char const *numRomano, int *vetorNumeroRom){
+	int i = 0, tamString = strlen(numRomano), numAuxiliar = 0;
+
+	if(tamString > 30) return ERRO; // se o tamanho da string for maior que 30, retorna erro
+
+	//loop que vai inserir os valores individuais convertidos no vetor
+	for(i = 0; i < tamString; i++){
+		numAuxiliar = ValorDecimalAlgRomano(numRomano[i]);
+		if(numAuxiliar == -1){ 
+			return ERRO;
+		}
+		vetorNumeroRom[i] = numAuxiliar;
+	}
+
+	return 0; 
+}
+
 //Funcao que vai converter, de fato, o numero romano passado para arabico
 int ConverteNumeroRomano(char const *numRomano){
 	int i = 0, tamString = strlen(numRomano), valorFinal = 0;
 	int num1 = 0, num2 = 0; // receberao os numeros individuais convertidos de romano para arabico
-
-	if(tamString > 30) return ERRO; // se o tamanho da string for maior que 30, retorna erro
-
+	int vetorNumeroRom[30];
 
 	i = 0;
+	if(CriaVetorNumerosArabicos(numRomano, vetorNumeroRom) == -1){
+		return ERRO;
+	}
 	//a ideia eh percorrer a string, e:
 	//1. Pega um numero, se o proximo eh maior, valor final recebe a subtracao do proximo e do atual
 	//2. Se nao eh maior, valor final recebe o proprio valor
 	while(i < tamString){
 		if(i+1 < tamString){
-			num2 = ValorDecimalAlgRomano(numRomano[i + 1]);
+			num2 = vetorNumeroRom[i + 1];
 		}
-		num1 = ValorDecimalAlgRomano(numRomano[i]);
+		num1 = vetorNumeroRom[i];
 		if(num2 == -1 || num1 == -1){
 			return ERRO; // se qualquer um dos numeros for invalido, retorna -1
 		}

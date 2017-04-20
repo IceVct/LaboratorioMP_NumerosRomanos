@@ -10,4 +10,5 @@
 
 /*Assinatura das funcoes que serao implementadas*/
 int ValorDecimalAlgRomano(char romano);
+int CriaVetorNumerosArabicos(char const *numRomano, int *vetorNumeroRom);
 int ConverteNumeroRomano(char const *numRomano);

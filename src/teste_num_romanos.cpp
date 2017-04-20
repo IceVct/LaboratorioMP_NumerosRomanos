@@ -18,11 +18,21 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(ValorDecimalAlgRomano('i') == -1);
 	}
 
+	int vetor[30];
+	SECTION("Testando a funcao que cria um vetor com os numeros ja convertidos para arabico"){
+		REQUIRE(CriaVetorNumerosArabicos("XXX", vetor) == 0);
+		REQUIRE(CriaVetorNumerosArabicos("IV", vetor) == 0);
+		REQUIRE(CriaVetorNumerosArabicos("zs", vetor) == ERRO);
+		REQUIRE(CriaVetorNumerosArabicos("02", vetor) == ERRO);
+		REQUIRE(CriaVetorNumerosArabicos("MMMI", vetor) == 0);
+		REQUIRE(CriaVetorNumerosArabicos("MCDEA", vetor) == ERRO);
+	}
+
 	//essa secao testa a funcao ConverteNumeroRomano
 	// ERRO vale -1
 	SECTION("Testando a funcao que retorna a conversao de romano para arabico"){
 		REQUIRE(ConverteNumeroRomano("I") == 1);
-		REQUIRE(ConverteNumeroRomano("IV") == 4);
+		REQUIRE(ConverteNumeroRomano("IV") == 4);	
 		REQUIRE(ConverteNumeroRomano("X") == 10);
 		REQUIRE(ConverteNumeroRomano("XIX") == 19);
 		REQUIRE(ConverteNumeroRomano("XLIX") == 49);
