@@ -109,9 +109,13 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(ConverteNumeroRomano("MMvS") == ERRO);
 		REQUIRE(ConverteNumeroRomano("IiV") == ERRO);
 		REQUIRE(ConverteNumeroRomano("DL2") == ERRO);
+		REQUIRE(ConverteNumeroRomano("XXXXI") == ERRO);
 		REQUIRE(ConverteNumeroRomano("MMZMx") == ERRO);
 		REQUIRE(ConverteNumeroRomano("MMMMM") == ERRO);
 		REQUIRE(ConverteNumeroRomano("MDD") == ERRO);
+		REQUIRE(ConverteNumeroRomano("VV") == ERRO);
+		REQUIRE(ConverteNumeroRomano("VX") == ERRO);
+		REQUIRE(ConverteNumeroRomano("LC") == ERRO);
 		REQUIRE(ConverteNumeroRomano("VXV") == ERRO);
 		REQUIRE(ConverteNumeroRomano("MMMI") == ERRO);
 	}
