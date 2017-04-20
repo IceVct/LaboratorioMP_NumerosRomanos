@@ -28,19 +28,34 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(CriaVetorNumerosArabicos("MCDEA", vetor) == ERRO);
 	}
 
-	SECTION("Testando a funcao que valida a quantidade de V, L e D quem existem no numero romano"){
+	SECTION("Testando a funcao que valida a quantidade de V, L e D que existem no numero romano"){
 		int vetor[] = {10, 5, 1};
 		REQUIRE(ValidaV_L_D(vetor, 3) == 0);
 		int vetor1[] = {10, 5, 5};
 		REQUIRE(ValidaV_L_D(vetor1, 3) == ERRO);
 		int vetor2[] = {10, 5, 1, 5};
 		REQUIRE(ValidaV_L_D(vetor2, 4) == ERRO);
-		int vetor3[] = {1000, 50, 50, 5};
+		int vetor3[] = {5, 50, 50, 5};
 		REQUIRE(ValidaV_L_D(vetor3, 4) == ERRO);
 		int vetor4[] = {100, 50, 1};
 		REQUIRE(ValidaV_L_D(vetor4, 3) == 0);
 		int vetor5[] = {100, 500, 500};
 		REQUIRE(ValidaV_L_D(vetor5, 3) == ERRO);
+	}
+
+	SECTION("Testando a funcao que valida a quantidade de I, X e C que existem no numero romano"){
+		int vetor[] = {10, 10, 10};
+		REQUIRE(ValidaI_X_C(vetor, 3) == 0);
+		int vetor1[] = {1, 1, 1};
+		REQUIRE(ValidaI_X_C(vetor1, 3) == 0);
+		int vetor2[] = {10, 10, 10, 10};
+		REQUIRE(ValidaI_X_C(vetor2, 4) == ERRO);
+		int vetor3[] = {1, 1, 1, 1};
+		REQUIRE(ValidaI_X_C(vetor3, 4) == ERRO);
+		int vetor4[] = {100, 50, 100, 100, 100};
+		REQUIRE(ValidaI_X_C(vetor4, 5) == ERRO);
+		int vetor5[] = {100, 100, 100};
+		REQUIRE(ValidaI_X_C(vetor5, 3) == 0);
 	}
 
 	//essa secao testa a funcao ConverteNumeroRomano
@@ -65,6 +80,8 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(ConverteNumeroRomano("DL2") == ERRO);
 		REQUIRE(ConverteNumeroRomano("MMZMx") == ERRO);
 		REQUIRE(ConverteNumeroRomano("MMMMM") == ERRO);
+		REQUIRE(ConverteNumeroRomano("MDD") == ERRO);
+		REQUIRE(ConverteNumeroRomano("VXV") == ERRO);
 		REQUIRE(ConverteNumeroRomano("MMMI") == ERRO);
 	}
 }

@@ -23,12 +23,40 @@ int ValorDecimalAlgRomano(char romano){
 	return valorRetorno;
 }
 
+//Funcao que valida os numeros I, X e C, que so podem aparecer ate 3 vezes
+//retorna 0 caso seja valido e -1 caso contrario
+int ValidaI_X_C(int *vetorNumeroRom, int tamanhoVetor){
+	int contaI = 0, contaX = 0, contaC = 0; // contadores para a quantidade de Is, Xs e Cs que tem no numero romano
+	int i = 0;
+
+	//vai percorrer o vetor e realizar as contagens
+	for(i = 0; i < tamanhoVetor; i++){
+		if(vetorNumeroRom[i] == 1){
+			contaI++;
+		}
+		if(vetorNumeroRom[i] == 10){
+			contaX++;
+		}
+		if(vetorNumeroRom[i] == 100){
+			contaC++;
+		}
+	}
+
+	//se qualquer um dos contadores for maior que 3, quer dizer que houve erro
+	if((contaI > 3) || (contaX > 3) || (contaC > 3)){
+		return ERRO;
+	}
+
+	return 0;
+}
+
 //Funcao que valida os numeros V, L e D, que so podem aparecer uma vez
-//retorna 0 caso seja valido e -1 caso nao
+//retorna 0 caso seja valido e -1 caso contrario
 int ValidaV_L_D(int *vetorNumeroRom, int tamanhoVetor){
 	int contaV = 0, contaL = 0, contaD = 0; //contadores para a quantidade de Vs, Ls e Ds que tem no numero romano
 	int i = 0;
 
+	//vai percorrer o vetor e realizar as contagens
 	for(i = 0; i < tamanhoVetor; i++){
 		if(vetorNumeroRom[i] == 5){
 			contaV++;
@@ -75,7 +103,11 @@ int ConverteNumeroRomano(char const *numRomano){
 	int vetorNumeroRom[30];
 
 	i = 0;
-	if(CriaVetorNumerosArabicos(numRomano, vetorNumeroRom) == -1){
+	if(CriaVetorNumerosArabicos(numRomano, vetorNumeroRom) == ERRO){
+		return ERRO;
+	}
+	// se tiver mais de um V, L ou D, ja retorna erro, porque o numero eh invalido
+	if(ValidaV_L_D(vetorNumeroRom, tamString) == ERRO){
 		return ERRO;
 	}
 	//a ideia eh percorrer a string, e:
