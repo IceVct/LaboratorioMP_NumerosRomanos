@@ -58,6 +58,29 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(ValidaI_X_C(vetor5, 3) == 0);
 	}
 
+	SECTION("Testando a funcao que valida a as subtracoes combinadas"){
+		int vetor[] = {1, 9, 10};
+		REQUIRE(ValidaSubstracoesCombinadas(vetor, 3) == ERRO);
+		int vetor1[] = {1, 1, 1};
+		REQUIRE(ValidaSubstracoesCombinadas(vetor1, 3) == 0);
+		int vetor2[] = {100, 10, 50, 10};
+		REQUIRE(ValidaSubstracoesCombinadas(vetor2, 4) == ERRO);
+		int vetor3[] = {100, 1, 50, 100};
+		REQUIRE(ValidaSubstracoesCombinadas(vetor3, 4) == ERRO);
+		int vetor4[] = {100, 10, 50, 1, 10};
+		REQUIRE(ValidaSubstracoesCombinadas(vetor4, 5) == 0);
+		int vetor5[] = {10, 100, 1, 10};
+		REQUIRE(ValidaSubstracoesCombinadas(vetor5, 4) == 0);
+		int vetor6[] = {1, 1, 10};
+		REQUIRE(ValidaSubstracoesCombinadas(vetor6, 3) == ERRO);
+		int vetor7[] = {5, 10};
+		REQUIRE(ValidaSubstracoesCombinadas(vetor7, 2) == ERRO);
+		int vetor8[] = {1, 10, 10};
+		REQUIRE(ValidaSubstracoesCombinadas(vetor8, 3) == ERRO);
+		int vetor9[] = {1000, 1000, 100, 1000, 10, 100, 1, 10};
+		REQUIRE(ValidaSubstracoesCombinadas(vetor9, 8) == 0);
+	}
+
 	//essa secao testa a funcao ConverteNumeroRomano
 	// ERRO vale -1
 	SECTION("Testando a funcao que retorna a conversao de romano para arabico"){
@@ -65,7 +88,7 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(ConverteNumeroRomano("IV") == 4);	
 		REQUIRE(ConverteNumeroRomano("X") == 10);
 		REQUIRE(ConverteNumeroRomano("XIX") == 19);
-		REQUIRE(ConverteNumeroRomano("XLIX") == 49);
+		REQUIRE(ConverteNumeroRomano("CXLIX") == 149);
 		REQUIRE(ConverteNumeroRomano("CCCLXXXVIII") == 388);
 		REQUIRE(ConverteNumeroRomano("CDLXXIV") == 474);
 		REQUIRE(ConverteNumeroRomano("CMVIII") == 908);

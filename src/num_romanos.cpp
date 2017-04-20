@@ -80,6 +80,44 @@ int ValidaV_L_D(int *vetorNumeroRom, int tamanhoVetor){
 //Funcao que valida subtracoes combinadas, ou seja, casos em que um dado valor eh menor que o proximo
 //retorna 0 caso seja valido e -1 caso contrario
 int ValidaSubstracoesCombinadas(int *vetorNumeroRom, int tamanhoVetor){
+	int num1 = 0, num2 = 0, subtraido = 0;
+	int i = 0, contaNumConv = 0;
+	int vetorAuxiliar[30]; // vai receber os valores ja convertidos
+	float divisaoMenMaior = 0; // variavel que vai receber a divisao do menor numero pelo maior e comparar
+
+	//loop que vai percorrer o vetor e fazer as validacoes
+	contaNumConv = 0;
+	while(i < tamanhoVetor){
+		if(i + 1 < tamanhoVetor){
+			num2 = vetorNumeroRom[i + 1];
+		}
+		num1 = vetorNumeroRom[i];
+		if(num1 >= subtraido && subtraido > 0){
+			return ERRO; //se o proximo valor for maior ou igual ao ultimo valor subtraido, retorna erro
+		}
+		if(num1 < num2 && i+1 < tamanhoVetor){
+			subtraido = num1;
+			vetorAuxiliar[contaNumConv] = num2 - num1;
+			divisaoMenMaior = (float)num1/num2;
+			if(divisaoMenMaior < 0.1){
+				return ERRO; // se a divisao entre o menor numero e o maior for menor que 1/10, significa que eh invalido
+			}
+			if(subtraido != 1 && subtraido != 10 && subtraido != 100){
+				return ERRO; // se o valor que vai ser subtraido for 5, 50 ou 500, retorna erro
+			}
+			i += 2;	
+		}else{
+			vetorAuxiliar[contaNumConv] = num1;
+			i++;
+		}
+		contaNumConv++;
+	}
+
+	for(i = 1; i < contaNumConv; i++){
+		if(vetorAuxiliar[i] > vetorAuxiliar[0]){
+			return ERRO; //se qualquer um dos numeros convertidos depois do primeiro for maior que o primeiro, retorna erro!
+		}
+	}
 
 	return 0;
 }
@@ -125,9 +163,6 @@ int ConverteNumeroRomano(char const *numRomano){
 			num2 = vetorNumeroRom[i + 1];
 		}
 		num1 = vetorNumeroRom[i];
-		if(num2 == -1 || num1 == -1){
-			return ERRO; // se qualquer um dos numeros for invalido, retorna -1
-		}
 		if(num1 < num2 && i+1 < tamString){
 			valorFinal += num2 - num1;
 			i += 2;
