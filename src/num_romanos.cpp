@@ -23,6 +23,32 @@ int ValorDecimalAlgRomano(char romano){
 	return valorRetorno;
 }
 
+//Funcao que valida os numeros V, L e D, que so podem aparecer uma vez
+//retorna 0 caso seja valido e -1 caso nao
+int ValidaV_L_D(int *vetorNumeroRom, int tamanhoVetor){
+	int contaV = 0, contaL = 0, contaD = 0; //contadores para a quantidade de Vs, Ls e Ds que tem no numero romano
+	int i = 0;
+
+	for(i = 0; i < tamanhoVetor; i++){
+		if(vetorNumeroRom[i] == 5){
+			contaV++;
+		}
+		if(vetorNumeroRom[i] == 50){
+			contaL++;
+		}
+		if(vetorNumeroRom[i] == 500){
+			contaD++;
+		}
+	}
+
+	//se qualquer um dos contadores for maior que 1, quer dizer que houve um erro
+	if((contaV > 1) || (contaL > 1) || (contaD > 1)){
+		return ERRO;
+	}
+
+	return 0; 
+}
+
 //Funcao que vai criar um vetor com os valores numericos individuais dos numeros romanos validos
 //Vai retornar 0 caso tenha criado com sucesso e -1 caso tenha ocorrido um erro
 int CriaVetorNumerosArabicos(char const *numRomano, int *vetorNumeroRom){

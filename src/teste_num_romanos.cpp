@@ -28,6 +28,21 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(CriaVetorNumerosArabicos("MCDEA", vetor) == ERRO);
 	}
 
+	SECTION("Testando a funcao que valida a quantidade de V, L e D quem existem no numero romano"){
+		int vetor[] = {10, 5, 1};
+		REQUIRE(ValidaV_L_D(vetor, 3) == 0);
+		int vetor1[] = {10, 5, 5};
+		REQUIRE(ValidaV_L_D(vetor1, 3) == ERRO);
+		int vetor2[] = {10, 5, 1, 5};
+		REQUIRE(ValidaV_L_D(vetor2, 4) == ERRO);
+		int vetor3[] = {1000, 50, 50, 5};
+		REQUIRE(ValidaV_L_D(vetor3, 4) == ERRO);
+		int vetor4[] = {100, 50, 1};
+		REQUIRE(ValidaV_L_D(vetor4, 3) == 0);
+		int vetor5[] = {100, 500, 500};
+		REQUIRE(ValidaV_L_D(vetor5, 3) == ERRO);
+	}
+
 	//essa secao testa a funcao ConverteNumeroRomano
 	// ERRO vale -1
 	SECTION("Testando a funcao que retorna a conversao de romano para arabico"){
