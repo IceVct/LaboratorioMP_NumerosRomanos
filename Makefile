@@ -26,7 +26,6 @@ teste_num_romano: $(OBJ)
 	rm ./catch.hpp.gcov
 	rm ./*.gcda
 	rm ./*.gcno
- 	doxygen Doxifile
 
 .PHONY: clean
 
