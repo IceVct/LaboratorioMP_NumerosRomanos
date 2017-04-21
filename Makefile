@@ -1,6 +1,6 @@
 IDIR = ./include
 CC=g++
-CFLAGS=-I$(IDIR)
+CFLAGS=-I$(IDIR) -ftest-coverage -fprofile-arcs
 
 ODIR = ./obj
 SRC = ./src
@@ -19,6 +19,14 @@ $(ODIR)/%.o: $(SRC)/%.cpp $(DEPS)
 
 teste_num_romano: $(OBJ)
 	g++ -o $@ $^ $(CFLAGS) $(LIBS)
+	./teste_num_romano
+	mv ./obj/*.gcda ./
+	mv ./obj/*.gcno ./
+	gcov teste_num_romanos.gcno
+	rm ./catch.hpp.gcov
+	rm ./*.gcda
+	rm ./*.gcno
+ 	doxygen Doxifile
 
 .PHONY: clean
 

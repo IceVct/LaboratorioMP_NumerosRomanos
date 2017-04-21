@@ -1,8 +1,12 @@
 #include "num_romanos.hpp"
 #include "../include/catch.hpp"
 
-//Test case vai testar as duas funcoes implementadas no programa
+/// Test case vai testar todas as funcoes implementadas no programa
 TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
+	/** 
+		\details TEST_CASE da framework de testes catch. Cada uma das secoes dessa teste case
+		vai testar as funcoes implementadas no programa.
+	*/
 
 	//essa secao testa a funcao ValorDecimalAlgRomano
 	SECTION("Testando a funcao que retorna o algarismo arabico correspondente"){
@@ -18,6 +22,7 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(ValorDecimalAlgRomano('i') == -1);
 	}
 
+	//essa secao testa a funcao CriaVetorNumerosArabicos
 	int vetor[30];
 	SECTION("Testando a funcao que cria um vetor com os numeros ja convertidos para arabico"){
 		REQUIRE(CriaVetorNumerosArabicos("XXX", vetor) == 0);
@@ -28,6 +33,7 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(CriaVetorNumerosArabicos("MCDEA", vetor) == ERRO);
 	}
 
+	//essa secao testa a funcao ValidaV_L_D
 	SECTION("Testando a funcao que valida a quantidade de V, L e D que existem no numero romano"){
 		int vetor[] = {10, 5, 1};
 		REQUIRE(ValidaV_L_D(vetor, 3) == 0);
@@ -45,6 +51,7 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(ValidaV_L_D(vetor6, 6) == 0);
 	}
 
+	//essa secao testa a funcao ValidaI_X_C
 	SECTION("Testando a funcao que valida a quantidade de I, X e C que existem no numero romano"){
 		int vetor[] = {10, 10, 10};
 		REQUIRE(ValidaI_X_C(vetor, 3) == 0);
@@ -64,6 +71,7 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(ValidaI_X_C(vetor7, 6) == 0);
 	}
 
+	//essa secao testa a funcao ValidaSubstracoesCombinadas
 	SECTION("Testando a funcao que valida a as subtracoes combinadas"){
 		int vetor[] = {1, 9, 10};
 		REQUIRE(ValidaSubstracoesCombinadas(vetor, 3) == ERRO);
@@ -114,9 +122,10 @@ TEST_CASE("Numeros romanos para arabicos", "[romanos_arabicos]"){
 		REQUIRE(ConverteNumeroRomano("MMMMM") == ERRO);
 		REQUIRE(ConverteNumeroRomano("MDD") == ERRO);
 		REQUIRE(ConverteNumeroRomano("VV") == ERRO);
-		REQUIRE(ConverteNumeroRomano("VX") == ERRO);
+		REQUIRE(ConverteNumeroRomano("VXV") == ERRO);
 		REQUIRE(ConverteNumeroRomano("LC") == ERRO);
 		REQUIRE(ConverteNumeroRomano("VXV") == ERRO);
 		REQUIRE(ConverteNumeroRomano("MMMI") == ERRO);
+		
 	}
 }

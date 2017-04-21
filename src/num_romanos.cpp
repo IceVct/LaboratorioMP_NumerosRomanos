@@ -1,13 +1,18 @@
 #include "num_romanos.hpp"
-
-//Trabalho MP conversao numeros romanos para algarismos arabicos - 1/2017
 //Victor Araujo Vieira - 14/0032801
+//MP - 1/2017 - TRABALHO 2
 
-//Funcao que vai converter o algarismo romano para seu equivalente em arabico, individualmente
+/// Funcao que vai converter o algarismo romano para seu equivalente em arabico, individualmente.
 int ValorDecimalAlgRomano(char romano){
 	int valorRetorno = 0;
 
-	//I = 1; V = 5; X = 10; L = 50; C = 100; D = 500; M = 1000
+	/**
+		\details Vai pegar um caracter que corresponde a um algarismo romano e converte ele. 
+		I = 1; V = 5; X = 10; L = 50; C = 100; D = 500; M = 1000.
+		\param romano Caracter que corresponde ao numero romano.
+		\return Retorna o numero romano convertido.
+	*/
+
 	//se nao estiver entre esses, retorna -1, oq indica erro
 	switch(romano){
 		case 'I': valorRetorno = 1; break;
@@ -23,12 +28,20 @@ int ValorDecimalAlgRomano(char romano){
 	return valorRetorno;
 }
 
-//Funcao que valida os numeros I, X e C, que so podem aparecer ate 3 vezes seguidas
-//retorna 0 caso seja valido e -1 caso contrario
+/// Funcao que valida os numeros I, X e C, que so podem aparecer ate 3 vezes seguidas.
 int ValidaI_X_C(int *vetorNumeroRom, int tamanhoVetor){
 	int contaI = 0, contaX = 0, contaC = 0; // contadores para a quantidade de Is, Xs e Cs que tem no numero romano
 	int invalidaI = 0, invalidaX = 0, invalidaC = 0; // sao as variaveis que vao invalidar I, X e C
 	int i = 0, j = 0;
+
+	/**
+		\details Vai pegar um vetor com os numeros ja convertidos, e a partir do vetor, 
+		vai verificar se os numeros I, X e C sao repetidos mais de 3 vezes seguidas.
+		\param *vetorNumeroRom Vetor de inteiros que contem os numeros individuais romanos ja convertidos.
+		\param tamanhoVetor Inteiro que corresponde ao tamanho do vetor.
+		\return 0 Caso seja valido.
+		\return -1 Caso seja invalido.
+	*/
 
 
 	for(i = 0; i < tamanhoVetor; i++){
@@ -77,11 +90,19 @@ int ValidaI_X_C(int *vetorNumeroRom, int tamanhoVetor){
 	return 0;
 }
 
-//Funcao que valida os numeros V, L e D, que so podem aparecer uma vez
-//retorna 0 caso seja valido e -1 caso contrario
+/// Funcao que valida os numeros V, L e D, que so podem aparecer uma vez.
 int ValidaV_L_D(int *vetorNumeroRom, int tamanhoVetor){
 	int contaV = 0, contaL = 0, contaD = 0; //contadores para a quantidade de Vs, Ls e Ds que tem no numero romano
 	int i = 0;
+
+	/**
+		\details Vai pegar um vetor com os numeros ja convertidos, e a partir do vetor, 
+		vai verificar se os numeros V, L e D aparecem mais de uma vez no numero romano.
+		\param *vetorNumeroRom Vetor de inteiros que contem os numeros individuais romanos ja convertidos.
+		\param tamanhoVetor Inteiro que corresponde ao tamanho do vetor.
+		\return 0 Caso seja valido.
+		\return -1 Caso seja invalido.
+	*/
 
 	//vai percorrer o vetor e realizar as contagens
 	for(i = 0; i < tamanhoVetor; i++){
@@ -104,13 +125,22 @@ int ValidaV_L_D(int *vetorNumeroRom, int tamanhoVetor){
 	return 0; 
 }
 
-//Funcao que valida subtracoes combinadas, ou seja, casos em que um dado valor eh menor que o proximo
-//retorna 0 caso seja valido e -1 caso contrario
+/// Funcao que valida subtracoes combinadas, ou seja, casos em que um dado valor eh menor que o proximo
 int ValidaSubstracoesCombinadas(int *vetorNumeroRom, int tamanhoVetor){
 	int num1 = 0, num2 = 0, subtraido = 0;
 	int i = 0, contaNumConv = 0;
 	int vetorAuxiliar[30]; // vai receber os valores ja convertidos
 	float divisaoMenMaior = 0; // variavel que vai receber a divisao do menor numero pelo maior e comparar
+
+	/**
+		\details Vai pegar um vetor com os numeros ja convertidos, e a partir do vetor, 
+		vai validar os casos com subtracoes combinadas, ou seja, quando tem um numero e um maior subsequente, como IX ou IV
+		e vai verificar os casos de erro, para entao, validar esse numero romano.
+		\param *vetorNumeroRom Vetor de inteiros que contem os numeros individuais romanos ja convertidos.
+		\param tamanhoVetor Inteiro que corresponde ao tamanho do vetor.
+		\return 0 Caso seja valido.
+		\return -1 Caso seja invalido.
+	*/
 
 	//loop que vai percorrer o vetor e fazer as validacoes
 	contaNumConv = 0;
@@ -149,10 +179,18 @@ int ValidaSubstracoesCombinadas(int *vetorNumeroRom, int tamanhoVetor){
 	return 0;
 }
 
-//Funcao que vai criar um vetor com os valores numericos individuais dos numeros romanos validos
-//Vai retornar 0 caso tenha criado com sucesso e -1 caso tenha ocorrido um erro
+/// Funcao que vai criar um vetor com os valores numericos individuais dos numeros romanos validos
 int CriaVetorNumerosArabicos(char const *numRomano, int *vetorNumeroRom){
 	int i = 0, tamString = strlen(numRomano), numAuxiliar = 0;
+
+	/**
+		\details Funcao que vai criar um vetor com os valores individuais arabicos, convertidos a partir do numero romano,
+		caso ele seja valido.
+		\param *numRomano String que contem o numero romano que sera convertido.
+		\param *vetorNumeroRom Vetor de inteiros que corresponde ao vetor que sera inserido os valores convertidos.
+		\return 0 Caso o vetor tenha sido criado com sucesso.
+		\return -1 Caso tenha ocorrido um erro ao criar o vetor.
+	*/	
 
 	if(tamString > 30) return ERRO; // se o tamanho da string for maior que 30, retorna erro
 
@@ -168,11 +206,19 @@ int CriaVetorNumerosArabicos(char const *numRomano, int *vetorNumeroRom){
 	return 0; 
 }
 
-//Funcao que vai converter, de fato, o numero romano passado para arabico
+/// Funcao que vai converter, de fato, o numero romano passado para arabico
 int ConverteNumeroRomano(char const *numRomano){
 	int i = 0, tamString = strlen(numRomano), valorFinal = 0;
 	int num1 = 0, num2 = 0; // receberao os numeros individuais convertidos de romano para arabico
 	int vetorNumeroRom[30];
+
+	/**
+		\details Funcao que vai receber uma string com um numero romano e, se ele for um numero valido, vai converter
+		e retornar o valor em arabico.
+		\param *numRomano String que contem o numero romano que sera convertido.
+		\return Caso nao tenha ocorrido nenhum erro, retornara o numero romano convertido para arabico.
+		\return -1 Caso o numero romano passado como parametro seja invalido.
+	*/	
 
 	i = 0;
 	if(CriaVetorNumerosArabicos(numRomano, vetorNumeroRom) == ERRO){
